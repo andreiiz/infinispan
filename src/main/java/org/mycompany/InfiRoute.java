@@ -42,7 +42,7 @@ public class InfiRoute extends RouteBuilder {
 	    .setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
 	    .setHeader(InfinispanConstants.KEY).constant("123")
 	   .setHeader(InfinispanConstants.VALUE).constant("hello")
-	    .to("infinispan://datagrid-external-datagrid.apps.integration.lab.local/sap-test?username=developer&password=TcrlVPRLsCyfFgWI");	 
+	    .to("infinispan:datagrid-external-datagrid.apps.integration.lab.local/sap-test:11222?username=developer&password=TcrlVPRLsCyfFgWI");	 
 	}
 
 }
