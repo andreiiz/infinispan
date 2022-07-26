@@ -39,11 +39,11 @@ public class InfiRoute extends RouteBuilder {
 	public void configure() throws Exception {
 		 
 		// TODO Auto-generated method stub
-		 from("direct:start")
+		 from("timer://foo?repeatCount=1")
 	    .setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
 	    .setHeader(InfinispanConstants.KEY).constant("123")
-	   .setHeader(InfinispanConstants.VALUE).constant("hello")
-	    .to("infinispan://sap-test");	 
+	    .setHeader(InfinispanConstants.VALUE).constant("hello")
+	    .to("infinispan:datagrid-externaldatagrid.apps.integration.lab.local/sap-test?username=developer&password=TcrlVPRLsCyfFgWI");	 
 	}
 
 }
