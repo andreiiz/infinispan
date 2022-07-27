@@ -46,8 +46,8 @@ public class InfiRoute extends RouteBuilder {
 		builder.clientIntelligence(ClientIntelligence.BASIC);
 		
 		builder.addServer()
-        .host("https://datagrid-external-datagrid.apps.integration.lab.local")
-        .port(80)
+     .host("datagrid-external-datagrid.apps.integration.lab.local")
+      //  .port(80)
         .clientIntelligence(ClientIntelligence.BASIC)
         .security().authentication()
         .saslMechanism("DIGEST-MD5")
