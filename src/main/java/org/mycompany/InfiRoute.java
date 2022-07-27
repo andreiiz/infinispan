@@ -43,17 +43,21 @@ public class InfiRoute extends RouteBuilder {
 		
 		
 		ConfigurationBuilder builder = new ConfigurationBuilder();
-		builder.clientIntelligence(ClientIntelligence.BASIC);
+		
 		
 		builder.addServer()
      .host("datagrid-external-datagrid.apps.integration.lab.local")
         .port(80)
         .clientIntelligence(ClientIntelligence.BASIC)
         .security().authentication()
-        .saslMechanism("DIGEST-MD5")
         .username("developer")
-        .password("TcrlVPRLsCyfFgWI");
-       
+        .password("TcrlVPRLsCyfFgWI")
+        .realm("default")
+		.saslMechanism("DIGEST-MD5")
+	//	.ssl()
+	//	.sniHostName("datagrid-external-datagrid.apps.integration.lab.local")
+	//	.trustStorePath("" + getClass().getResource("/tls.crt"))
+		.clientIntelligence(ClientIntelligence.BASIC);
 		
 		RemoteCacheManager cacheManager = new RemoteCacheManager(builder.build());
 		RemoteCache rm = cacheManager.getCache();
