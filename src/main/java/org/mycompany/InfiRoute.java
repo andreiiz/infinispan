@@ -46,8 +46,9 @@ public class InfiRoute extends RouteBuilder {
 		builder.clientIntelligence(ClientIntelligence.BASIC);
 		
 		builder.addServer()
-        .host("https://datagrid-external-datagrid.apps.integration.lab.local/rest/v2/caches/")
+        .host("https://datagrid-external-datagrid.apps.integration.lab.local")
         .port(80)
+        .clientIntelligence(ClientIntelligence.BASIC)
         .security().authentication()
         .saslMechanism("DIGEST-MD5")
         .username("developer")
@@ -55,14 +56,14 @@ public class InfiRoute extends RouteBuilder {
        
 		
 		RemoteCacheManager cacheManager = new RemoteCacheManager(builder.build());
-		RemoteCache rm = cacheManager.getCache("test");
+		RemoteCache rm = cacheManager.getCache();
 		// TODO Auto-generated method stub
 		 from("timer://foo?repeatCount=1")
 	    .setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
 	    .setHeader(InfinispanConstants.KEY).constant("123")
 	    .setHeader(InfinispanConstants.VALUE).constant("hello")
 	   // .to("infinispan://datagrid-external-datagrid.apps.integration.lab.local/sap-test?username=developer&password=TcrlVPRLsCyfFgWI");	
-	  .to("infinispan://sap-test&cacheContainerConfiguration=#cacheContainerConfiguration");
+	  .to("infinispan://sap-test?cacheContainer=#rm");
 	}
 
 }
