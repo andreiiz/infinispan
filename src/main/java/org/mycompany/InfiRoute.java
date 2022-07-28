@@ -7,6 +7,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.infinispan.InfinispanConstants;
 import org.apache.camel.component.infinispan.InfinispanOperation;
+import org.apache.camel.language.Bean;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
 import org.apache.camel.component.infinispan.*;
@@ -52,7 +53,7 @@ public class InfiRoute extends RouteBuilder {
      .host("datagrid.datagrid.svc.cluster.local")
      .port(11222)
      //.port(443)
-       // .clientIntelligence(ClientIntelligence.BASIC)
+        .clientIntelligence(ClientIntelligence.BASIC)
         .security().authentication().enable()
         .username("developer")
         .password("TcrlVPRLsCyfFgWI")
@@ -66,17 +67,19 @@ public class InfiRoute extends RouteBuilder {
 		//.trustStorePath("" + getClass().getResource("/tls.crt"));
 		.trustStorePath("/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt");
 		
+	
 		
 		RemoteCacheManager cacheManager = new RemoteCacheManager(builder.build());
 		//cm..getRegistry().bind("cacheManager", cacheManager);
 	//	RemoteCache rm = cacheManager.getCache("sap-test");
 		// TODO Auto-generated method stub
-		 from("timer://foo?repeatCount=1")
-	    .setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.GET)
+		 from("direct:saveKey")
+	    .setHeader(InfinispanConstants.OPERATION , constant(InfinispanOperation.PUT))
 	    .setHeader(InfinispanConstants.KEY).constant("12")  //o simple
-	   // .setHeader(InfinispanConstants.VALUE, simple("hello"))
-	   // .to("infinispan://datagrid-external-datagrid.apps.integration.lab.local/sap-test?username=developer&password=TcrlVPRLsCyfFgWI");	
-	  .to("infinispan://?cacheName=sap-test&cacheContainer=#cacheManager")
+	    .setHeader(InfinispanConstants.VALUE, simple("hello"))
+	   // .to("infinispan://datagrid-external-datagrid.apps.integration.lab.local/sap-test?username=developer&password=TcrlVPRLsCyfFgWI");	*/
+		 
+	  .to("infinispan:sap-test?cacheContainer=#cacheManager")
 		 .to("log: riri");
 	//  .to("log: message");
 	}
