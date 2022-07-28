@@ -74,7 +74,7 @@ public class InfiRoute extends RouteBuilder {
 	    .setHeader(InfinispanConstants.KEY).constant("123")  //o simple
 	    .setHeader(InfinispanConstants.VALUE).constant("hello")
 	   // .to("infinispan://datagrid-external-datagrid.apps.integration.lab.local/sap-test?username=developer&password=TcrlVPRLsCyfFgWI");	
-	  .to("infinispan://rm");
+	  .to("infinispan://rm?cacheContainer=#cacheManager");
 	//  .to("log: message");
 	}
 
