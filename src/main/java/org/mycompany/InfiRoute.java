@@ -67,7 +67,7 @@ public class InfiRoute extends RouteBuilder {
 		
 		
 		RemoteCacheManager cacheManager = new RemoteCacheManager(builder.build());
-		RemoteCache<String, String> rm = cacheManager.getCache("sap-test");
+		RemoteCache rm = cacheManager.getCache("sap-test");
 		// TODO Auto-generated method stub
 		 from("timer://foo?repeatCount=1")
 	    .setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
