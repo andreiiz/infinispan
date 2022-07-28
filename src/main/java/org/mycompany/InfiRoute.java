@@ -72,7 +72,7 @@ public class InfiRoute extends RouteBuilder {
 		 from("timer://foo?repeatCount=1")
 	    .setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
 	    .setHeader(InfinispanConstants.KEY , simple("123"))  //o simple
-	    .setHeader(InfinispanConstants.VALUE, simple("hello"))
+	   // .setHeader(InfinispanConstants.VALUE, simple("hello"))
 	   // .to("infinispan://datagrid-external-datagrid.apps.integration.lab.local/sap-test?username=developer&password=TcrlVPRLsCyfFgWI");	
 	  .to("infinispan://?cacheName=sap-test&cacheContainer=#cacheManager");
 	//  .to("log: message");
