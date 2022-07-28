@@ -3,6 +3,7 @@ package org.mycompany;
 
 import java.lang.module.Configuration;
 
+import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.infinispan.InfinispanConstants;
 import org.apache.camel.component.infinispan.InfinispanOperation;
@@ -41,7 +42,7 @@ public class InfiRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 		
-		
+		CamelContext cm = getContext();
 		ConfigurationBuilder builder = new ConfigurationBuilder();
 		
 		
@@ -67,6 +68,7 @@ public class InfiRoute extends RouteBuilder {
 		
 		
 		RemoteCacheManager cacheManager = new RemoteCacheManager(builder.build());
+		//cm..getRegistry().bind("cacheManager", cacheManager);
 	//	RemoteCache rm = cacheManager.getCache("sap-test");
 		// TODO Auto-generated method stub
 		 from("timer://foo?repeatCount=1")
