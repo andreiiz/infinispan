@@ -57,7 +57,7 @@ public class InfiRoute extends RouteBuilder {
         .password("TcrlVPRLsCyfFgWI")
         .serverName("datagrid")
         .realm("default")
-		.saslMechanism("PLAIN	")
+		.saslMechanism("PLAIN")
 		.saslQop(SaslQop.AUTH)
 		.ssl()
 	//	.sniHostName("cache-service-hotrod-route-datagrid.apps.integration.lab.local")
