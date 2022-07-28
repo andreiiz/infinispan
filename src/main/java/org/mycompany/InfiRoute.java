@@ -46,28 +46,36 @@ public class InfiRoute extends RouteBuilder {
 		
 		
 		builder.addServer()
-     .host("datagrid-external-datagrid.apps.integration.lab.local")
-        .port(80)
+     .host("datagrid-external-datagrid.apps.integration.lab.local") //cache-service-hotrod-route-datagrid.apps.integration.lab.local
+	//	.host("cache-service-hotrod-route-datagrid.apps.integration.lab.local")
+     .host("datagrid.datagrid.svc.cluster.local")
+     .port(11222)
+     //.port(443)
         .clientIntelligence(ClientIntelligence.BASIC)
-        .security().authentication()
+        .security().authentication().enable()
         .username("developer")
         .password("TcrlVPRLsCyfFgWI")
-        .realm("default")
+        .serverName("datagrid")
+        //.realm("default")
 		.saslMechanism("DIGEST-MD5")
-	//	.ssl()
+		.saslQop(SaslQop.AUTH)
+		.ssl()
+	//	.sniHostName("cache-service-hotrod-route-datagrid.apps.integration.lab.local")
 	//	.sniHostName("datagrid-external-datagrid.apps.integration.lab.local")
-	//	.trustStorePath("" + getClass().getResource("/tls.crt"))
-		.clientIntelligence(ClientIntelligence.BASIC);
+		//.trustStorePath("" + getClass().getResource("/tls.crt"));
+		.trustStorePath("/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt");
+		
 		
 		RemoteCacheManager cacheManager = new RemoteCacheManager(builder.build());
-		RemoteCache rm = cacheManager.getCache();
+		RemoteCache<String, String> rm = cacheManager.getCache("sap-test");
 		// TODO Auto-generated method stub
 		 from("timer://foo?repeatCount=1")
 	    .setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
-	    .setHeader(InfinispanConstants.KEY).constant("123")
+	    .setHeader(InfinispanConstants.KEY).constant("123")  //o simple
 	    .setHeader(InfinispanConstants.VALUE).constant("hello")
 	   // .to("infinispan://datagrid-external-datagrid.apps.integration.lab.local/sap-test?username=developer&password=TcrlVPRLsCyfFgWI");	
 	  .to("infinispan://sap-test?cacheContainer=#rm");
+	//  .to("log: message");
 	}
 
 }
