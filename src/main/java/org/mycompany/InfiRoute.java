@@ -46,7 +46,7 @@ public class InfiRoute extends RouteBuilder {
 		
 		
 		builder.addServer()
-     .host("datagrid-external-datagrid.apps.integration.lab.local") //cache-service-hotrod-route-datagrid.apps.integration.lab.local
+  //   .host("datagrid-external-datagrid.apps.integration.lab.local") //cache-service-hotrod-route-datagrid.apps.integration.lab.local
 	//	.host("cache-service-hotrod-route-datagrid.apps.integration.lab.local")
      .host("datagrid.datagrid.svc.cluster.local")
      .port(11222)
@@ -56,9 +56,9 @@ public class InfiRoute extends RouteBuilder {
         .username("developer")
         .password("TcrlVPRLsCyfFgWI")
         .serverName("datagrid")
-        //.realm("default")
-		.saslMechanism("DIGEST-MD5")
-		.saslQop(SaslQop.AUTH)
+        .realm("default")
+		.saslMechanism("PLAIN")
+		//.saslQop(SaslQop.AUTH)
 		.ssl()
 	//	.sniHostName("cache-service-hotrod-route-datagrid.apps.integration.lab.local")
 	//	.sniHostName("datagrid-external-datagrid.apps.integration.lab.local")
