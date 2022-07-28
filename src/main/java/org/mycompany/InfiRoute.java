@@ -79,15 +79,14 @@ public class InfiRoute extends RouteBuilder {
 	//	RemoteCache rm = cacheManager.getCache("sap-test");
 		// TODO Auto-generated method stub
 		 from("direct:saveKey")
-		 .doTry()
 	    .setHeader(InfinispanConstants.OPERATION , constant(InfinispanOperation.PUT))
 	    .setHeader(InfinispanConstants.KEY).constant("12")  //o simple
 	    .setHeader(InfinispanConstants.VALUE).constant("hello")
+	    .convertBodyTo(String.class)
 	   // .to("infinispan://datagrid-external-datagrid.apps.integration.lab.local/sap-test?username=developer&password=TcrlVPRLsCyfFgWI");	*/
 	  //  marshal().json(JsonLibrary.Jackson) 
 	  .to("infinispan:sap-test?cacheContainer=#cacheManager")
-	  .doCatch(NoTypeConversionAvailableException.class)
-	  .end();
+	 ;
 	//	 .to("log: riri");
 	//  .to("log: message");
 	}
