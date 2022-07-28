@@ -8,6 +8,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.infinispan.InfinispanConstants;
 import org.apache.camel.component.infinispan.InfinispanOperation;
 import org.apache.camel.language.Bean;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
 import org.apache.camel.component.infinispan.*;
@@ -76,9 +77,9 @@ public class InfiRoute extends RouteBuilder {
 		 from("direct:saveKey")
 	    .setHeader(InfinispanConstants.OPERATION , constant(InfinispanOperation.PUT))
 	    .setHeader(InfinispanConstants.KEY).constant("12")  //o simple
-	    .setHeader(InfinispanConstants.VALUE, simple("hello"))
+	    .setHeader(InfinispanConstants.VALUE).constant("hello").
 	   // .to("infinispan://datagrid-external-datagrid.apps.integration.lab.local/sap-test?username=developer&password=TcrlVPRLsCyfFgWI");	*/
-		 
+	    marshal().json(JsonLibrary.Jackson) 
 	  .to("infinispan:sap-test?cacheContainer=#cacheManager")
 		 .to("log: riri");
 	//  .to("log: message");
