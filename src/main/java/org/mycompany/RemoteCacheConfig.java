@@ -19,7 +19,7 @@ public class RemoteCacheConfig {
         ConfigurationBuilder builder = new ConfigurationBuilder();
         builder.addServer()//.host("sap-grid-external-datagrid.apps.integration.lab.local").port(443);
         //localhost, 80802
-        .host("datagrid.datagrid.svc.cluster.local")
+        .host("sap-grid.datagrid.svc.cluster.local")
         .port(11222);
         builder.socketTimeout(socketTimeout);
         builder.connectionTimeout(connecionTimeout);
@@ -36,8 +36,8 @@ public class RemoteCacheConfig {
                     .saslMechanism("PLAIN")
                     .saslQop(SaslQop.AUTH)
                     .ssl()
-                //   .trustStorePath(getClass().getResource("/tls.crt").getPath());
-                    .trustStorePath("/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt");
+                   .trustStorePath(getClass().getResource("/tls.crt").getPath());
+                    //.trustStorePath("/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt");
         } catch (Exception e) {
             System.out.println(e);
             System.exit(1);
