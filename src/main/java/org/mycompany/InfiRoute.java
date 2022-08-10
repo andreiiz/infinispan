@@ -9,6 +9,7 @@ import org.apache.camel.component.infinispan.InfinispanConstants;
 import org.apache.camel.component.infinispan.InfinispanOperation;
 import org.apache.camel.language.Bean;
 import org.apache.camel.model.dataformat.JsonLibrary;
+import org.apache.camel.spi.Registry;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
 
@@ -48,7 +49,7 @@ public class InfiRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 		
-		//CamelContext cm = getContext();
+		/*		//CamelContext cm = getContext();
 		ConfigurationBuilder builder = new ConfigurationBuilder();
 		
 		//CamelContext ccontext = new SpringCamelContext(applicationContext);
@@ -72,25 +73,25 @@ public class InfiRoute extends RouteBuilder {
 		//.trustStorePath("" + getClass().getResource("/tls.crt"));
 		.trustStorePath("/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt");
 		
-	
-		//JacksonDataFormat vendorJson = new JacksonDataFormat();
+		
+		Registry registry = CamelContext.
 		RemoteCacheManager cacheManager = new RemoteCacheManager(builder.build());
 		//cm..getRegistry().bind("cacheManager", cacheManager);
 	//	RemoteCache rm = cacheManager.getCache("sap-test");
 		// TODO Auto-generated method stub
 		 from("direct:saveKey")
-	    .setHeader(InfinispanConstants.OPERATION , constant(InfinispanOperation.PUT))
+	    .setHeader(CamelInfinispan , constant(InfinispanOperation.PUT))
 	    .setHeader(InfinispanConstants.KEY).constant("12")  //o simple
 	    .setHeader(InfinispanConstants.VALUE).constant("hello")
-	    .convertBodyTo(String.class)
-	   // .to("infinispan://datagrid-external-datagrid.apps.integration.lab.local/sap-test?username=developer&password=TcrlVPRLsCyfFgWI");	*/
-	  //  marshal().json(JsonLibrary.Jackson) 
+	 //   .convertBodyTo(String.class)
+	   // .to("infinispan://datagrid-external-datagrid.apps.integration.lab.local/sap-test?username=developer&password=TcrlVPRLsCyfFgWI");	
+	  .marshal().json() 
 	  .to("infinispan:sap-test?cacheContainer=#cacheManager")
 	 ;
 	//	 .to("log: riri");
 	//  .to("log: message");
 	}
-	/*@Bean(name = "stringDecoder") 
+	@Bean(name = "stringDecoder") 
 	public StringEncoder getStringEncoder() {
 	    return new StringEncoder();
 	}
@@ -98,6 +99,12 @@ public class InfiRoute extends RouteBuilder {
 	@Bean(name = "stringEncoder") 
 	public StringDecoder getStringDecoder() {
 	    return new StringDecoder();
-	} */
+	    
+*/			from("timer://foo?repeatCount=1")
+			.setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
+			.setHeader(InfinispanConstants.KEY).constant("1234")
+			.to("infinispan:sap-test");
+	
 
+}
 }
