@@ -17,7 +17,10 @@ public class RemoteCacheConfig {
     @Bean
     public RemoteCacheManager cacheContainer() {
         ConfigurationBuilder builder = new ConfigurationBuilder();
-        builder.addServer().host("localhost").port(8082);
+        builder.addServer()//.host("sap-grid-external-datagrid.apps.integration.lab.local").port(443);
+        //localhost, 80802
+        .host("datagrid.datagrid.svc.cluster.local")
+        .port(11222);
         builder.socketTimeout(socketTimeout);
         builder.connectionTimeout(connecionTimeout);
         builder.maxRetries(maxRetries);

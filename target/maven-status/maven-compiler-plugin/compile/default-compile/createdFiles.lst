@@ -1,2 +1,3 @@
 org\mycompany\InfiRoute.class
+org\mycompany\RemoteCacheConfig.class
 org\mycompany\Application.class
