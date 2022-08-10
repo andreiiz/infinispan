@@ -36,8 +36,8 @@ public class RemoteCacheConfig {
                     .saslMechanism("PLAIN")
                     .saslQop(SaslQop.AUTH)
                     .ssl()
-                   .trustStorePath(getClass().getResource("/tls.crt").getPath());
-                    //.trustStorePath("/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt");
+                //   .trustStorePath(getClass().getResource("/tls.crt").getPath());
+                    .trustStorePath("/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt");
         } catch (Exception e) {
             System.out.println(e);
             System.exit(1);
