@@ -13,17 +13,17 @@ public class InfiRoute extends RouteBuilder {
 	
 	@Override
 	public void configure() throws Exception {
-		JSONObject jos = new JSONObject();
-		jos.put("name", "jon doe");
-		jos.put("age", "22");
-		jos.put("city", "chicago");
+//		JSONObject jos = new JSONObject();
+//		jos.put("name", "jon doe");
+//		jos.put("age", "22");
+//		jos.put("city", "chicago");
 		
-		from("timer://foo?repeatCount=1")
-		//from("direct:provare") //.startupOrder(2)
-	//	.routeId("route2")
+		//from("timer://foo?repeatCount=1")
+		from("direct:provare").startupOrder(2)
+		.routeId("route2")
 			.setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
-			.setHeader(InfinispanConstants.KEY).constant("123456")
-			.setHeader(InfinispanConstants.VALUE).constant(jos.toString()) //era jos.tostring
+			.setHeader(InfinispanConstants.KEY).constant("1234567")
+			.setHeader(InfinispanConstants.VALUE).constant("${body}") //era jos.tostring
 			.to("infinispan:sap-test");
 	}
 }
