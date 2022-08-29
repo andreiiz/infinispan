@@ -22,7 +22,7 @@ public class InfiRoute extends RouteBuilder {
 		.routeId("route2")
 			.setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
 			.setHeader(InfinispanConstants.KEY).constant("123456")
-			.setHeader(InfinispanConstants.VALUE).constant(body()) //era jos.tostring
+		//	.setHeader(InfinispanConstants.VALUE).constant(setBody(String.class)) //era jos.tostring
 			.to("infinispan:sap-test");
 	}
 }
