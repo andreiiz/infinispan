@@ -22,8 +22,8 @@ public class InfiRoute extends RouteBuilder {
 		from("direct:provare").startupOrder(2)
 		.routeId("route2")
 			.setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
-			.setHeader(InfinispanConstants.KEY).constant("1234567")
-			.setHeader(InfinispanConstants.VALUE).constant("${body}") //era jos.tostring
+			.setHeader(InfinispanConstants.KEY).constant("12345678")
+			.setHeader(InfinispanConstants.VALUE).body() //.constant(${body}) //era jos.tostring
 			.to("infinispan:sap-test");
 	}
 }
