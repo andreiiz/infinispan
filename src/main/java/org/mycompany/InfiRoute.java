@@ -20,6 +20,7 @@ import org.apache.camel.component.infinispan.*;
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.client.hotrod.configuration.*;
+import org.json.JSONObject;
 @Component
 
 public class InfiRoute extends RouteBuilder {
@@ -100,10 +101,16 @@ public class InfiRoute extends RouteBuilder {
 	public StringDecoder getStringDecoder() {
 	    return new StringDecoder();
 	    
-*/			from("timer://foo?repeatCount=1")
+*/	
+		JSONObject jos = new JSONObject();
+		jos.put("name", "jon doe");
+		jos.put("age", "22");
+		jos.put("city", "chicago");
+		
+		from("timer://foo?repeatCount=1")
 			.setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
-			.setHeader(InfinispanConstants.KEY).constant("12345")
-			.setHeader(InfinispanConstants.VALUE).constant(30)
+			.setHeader(InfinispanConstants.KEY).constant("123456")
+			.setHeader(InfinispanConstants.VALUE).constant(jos)
 			.to("infinispan:sap-test");
 	
 
