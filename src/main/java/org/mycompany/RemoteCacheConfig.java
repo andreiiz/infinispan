@@ -30,7 +30,7 @@ public class RemoteCacheConfig {
         try {
             builder.security().authentication().enable()
                     .username("developer")
-                    .password("x")
+                    .password("mjzeawA9diahCyzP")
                     .serverName("datagrid")
                     .realm("default")
                     .saslMechanism("PLAIN")
