@@ -18,8 +18,8 @@ public class InfiRoute extends RouteBuilder {
 		jos.put("age", "22");
 		jos.put("city", "chicago");
 		
-		//from("timer://foo?repeatCount=1")
-		from("direct:provare") //.startupOrder(2)
+		from("timer://foo?repeatCount=1")
+		//from("direct:provare") //.startupOrder(2)
 	//	.routeId("route2")
 			.setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
 			.setHeader(InfinispanConstants.KEY).constant("123456")
