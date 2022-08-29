@@ -103,6 +103,7 @@ public class InfiRoute extends RouteBuilder {
 */			from("timer://foo?repeatCount=1")
 			.setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
 			.setHeader(InfinispanConstants.KEY).constant("12345")
+			.setHeader(InfinispanConstants.VALUE).constant(30)
 			.to("infinispan:sap-test");
 	
 
