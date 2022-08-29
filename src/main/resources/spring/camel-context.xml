@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring       https://camel.apache.org/schema/spring/camel-spring-2.23.3.xsd">
-    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring"/>
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+    <route id = "route1">
+    <from id ="f1" uri = "timer//:foo?counterRepeat=1"/>
+    <to id = "to1" uri= "bean:request" />
+    <to id = "to2" uri = "direct:prova" />
+    </route>
+    </camelContext>
+    <bean class =" org.mycompany.ProvaJson" id = "request" />
 </beans>
