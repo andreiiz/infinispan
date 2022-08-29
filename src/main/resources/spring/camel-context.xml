@@ -5,7 +5,7 @@
     <route id = "route1">
     <from id ="f1" uri = "timer://foo?repeatCount=1"/>
     <to id = "to1" uri= "bean:request" />
-    <to id = "to2" uri = "direct:prova" />
+    <to id = "to2" uri = "direct:provare" />
     </route>
     </camelContext>
     <bean class =" org.mycompany.ProvaJson" id = "request" />

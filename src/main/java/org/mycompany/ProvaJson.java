@@ -1,9 +1,7 @@
 package org.mycompany;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.builder.RouteBuilder;
 import org.json.JSONObject;
-import org.springframework.stereotype.Component;
 
 
 public class ProvaJson  {
