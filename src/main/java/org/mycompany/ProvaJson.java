@@ -10,7 +10,7 @@ public class ProvaJson  {
 		jos.put("name", "jon doe");
 		jos.put("age", "22");
 		jos.put("city", "chicago");
-		exchange.getIn().setBody(jos.toString());
+		exchange.getIn().setBody( jos);//jos.toString());
 	}
 	
 }
