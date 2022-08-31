@@ -26,7 +26,7 @@ public class RemoteCacheConfig {
         builder.maxRetries(maxRetries);
         builder.connectionPool().minIdle(10);
         builder.clientIntelligence(ClientIntelligence.BASIC);
-
+   
         try {
             builder.security().authentication().enable()
                     .username("developer")
