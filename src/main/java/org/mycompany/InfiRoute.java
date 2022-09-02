@@ -20,7 +20,7 @@ public class InfiRoute extends RouteBuilder {
 		from("direct:provare").startupOrder(2)
 		.routeId("route2")
 			.setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
-			.setHeader(InfinispanConstants.KEY).constant("funge")
+			.setHeader(InfinispanConstants.KEY).constant("nonsooo")
 		//	.setHeader(InfinispanConstants.VALUE).body() 
 			.to("infinispan:sap-test");
 	}
