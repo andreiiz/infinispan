@@ -21,7 +21,7 @@ public class InfiRoute extends RouteBuilder {
 		.routeId("route2")
 			.setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
 			.setHeader(InfinispanConstants.KEY).constant("funge")
-			.setHeader(InfinispanConstants.VALUE).body() 
+		//	.setHeader(InfinispanConstants.VALUE).body() 
 			.to("infinispan:sap-test");
 	}
 }
